@@ -6,10 +6,17 @@
     <title>Memory Game</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <h3>Score: <span id="result"></span></h3>
-    <div class="grid"></div>
-    <span id="message"></span>
+    <div class="content">
+      <h3><span id="score">Score:</span> <span id="result"></span></h3>
+      <p>
+        You win a point for every correct set<br />You lose a point every 4
+        fails
+      </p>
+      <div class="grid"></div>
+      <span id="message"> </span>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>

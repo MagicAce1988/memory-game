@@ -1,3 +1,19 @@
+body {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -7,6 +23,7 @@
 }
 
 #message {
+  margin-top: 10px;
   text-transform: uppercase;
   font-weight: 900;
   font-size: 14px;

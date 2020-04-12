@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const startTime = new Date();
+  let startTime;
+  let startTimeOnFirstFlip = 0;
   const cardArray = [
     {
       name: "astronaut",
@@ -59,6 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
   var cardsChosen = [];
   var cardsChosenId = [];
   var cardsWon = [];
+  var fails = 0;
+  resultDisplay.textContent = "0";
 
   function checkForMatch() {
     var cards = document.querySelectorAll("img");
@@ -72,11 +75,14 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       cards[optionOneId].setAttribute("src", "images/1.png");
       cards[optionTwoId].setAttribute("src", "images/1.png");
-      messageDisplay.textContent = "Sorry, try again";
+      fails++;
+      messageDisplay.textContent = `Sorry, try again! You failed ${
+        fails === 1 ? "1 time" : `${fails} times`
+      }`;
     }
     cardsChosen = [];
     cardsChosenId = [];
-    resultDisplay.textContent = cardsWon.length;
+    resultDisplay.textContent = cardsWon.length - parseInt(fails / 4);
     if (cardsWon.length === cardArray.length / 2) {
       const endTime = new Date();
       var res = Math.abs(endTime - startTime) / 1000;
@@ -84,11 +90,16 @@ document.addEventListener("DOMContentLoaded", () => {
       var seconds = Math.floor(res % 60);
       resultDisplay.textContent = `Congratulations! You found them all in ${
         minutes > 0 ? minutes + " minutes" : ""
-      } ${seconds} seconds `;
+      } ${seconds > 0 ? seconds + " seconds" : ""}`;
+      messageDisplay.textContent = `Final score is ${
+        cardsWon.length - parseInt(fails / 4)
+      }. It took you ${fails + 6} tries to do it.`;
     }
   }
 
   function flipCard() {
+    startTimeOnFirstFlip++;
+    startTime = startTimeOnFirstFlip === 1 ? new Date() : startTime;
     if (cardsChosen.length >= 2) return;
     let cardID = this.getAttribute("data-id");
     if (cardsChosenId.includes(cardID)) return;
